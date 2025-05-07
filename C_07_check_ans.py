@@ -39,6 +39,27 @@ def generate_equation(digits):
     return fin_equ, ans
 
 
+def int_check(question, error, exit_enabled="no"):
+    """Checks if the user has entered an integer"""
+
+    while True:
+
+        response = input(question)
+
+        if exit_enabled == "yes" and response == "xxx":
+            return response
+
+        if response == "":
+            return error
+
+        try:
+            response = int(response)
+            return response
+
+        except ValueError:
+            print(error)
+
+
 operations_list = [
     "+",
     "-",
@@ -48,5 +69,12 @@ operations_list = [
 # Main code
 # gets equation and answer and prints it
 gen_equ = generate_equation(3)
-print(gen_equ[0])
-print(f"= {gen_equ[1]}")
+question_output = f"{gen_equ[0]} = "
+solution = gen_equ[1]
+user_ans = int_check(question_output, "Please enter an integer.", "yes")
+if user_ans == solution:
+    print(f"Correct! The answer was {solution}")
+elif user_ans == "xxx":
+    print("you have exited the program!")
+else:
+    print(f"Wrong! The answer was {solution}")

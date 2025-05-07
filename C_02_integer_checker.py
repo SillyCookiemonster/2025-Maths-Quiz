@@ -1,8 +1,5 @@
-def int_check(question, blank, error="basic", bigger_than=0, exit_enabled="no"):
+def int_check(question, error, exit_enabled="no"):
     """Checks if the user has entered an integer"""
-
-    if error == "basic":
-        error = "Please enter an integer that is bigger than zero."
 
     while True:
 
@@ -12,18 +9,15 @@ def int_check(question, blank, error="basic", bigger_than=0, exit_enabled="no"):
             return response
 
         if response == "":
-            return blank
+            return error
 
         try:
             response = int(response)
-            if response <= bigger_than:
-                print(error)
-            else:
-                return response
+            return response
 
         except ValueError:
             print(error)
 
 
-user_ans = int_check("How many Rounds? ", "infinite")
+user_ans = int_check("How many Digits? ", "Please enter an integer that is bigger than zero.")
 print(user_ans)
