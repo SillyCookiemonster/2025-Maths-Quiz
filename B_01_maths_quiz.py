@@ -74,16 +74,10 @@ def int_check(question, error, smaller_than, bigger_than, exit_enabled="no"):
         try:
             response = int(response)
             # check if user response is within boundaries
-            if smaller_than == "none":
-                if response < bigger_than:
-                    print(error)
-                else:
-                    return response
+            if response < bigger_than or response > smaller_than:
+                print(error)
             else:
-                if response < bigger_than or response > smaller_than:
-                    print(error)
-                else:
-                    return response
+                return response
 
         except ValueError:
             print(error)
@@ -150,11 +144,11 @@ while True:
 
     # Record the round that just happened and add it to a list
     if user_response == true_ans:
-        game_results = (f"Round {round_num}: Question: {fin_q} | User answered: {user_response}"
-                        f" | The user's answer was correct")
+        game_results = (f"Question {round_num}: Question: {fin_q} | You answered: {user_response}"
+                        f" | Your answer was correct")
     else:
-        game_results = (f"Round {round_num}: Question: {fin_q} | User answered: {user_response}"
-                        f" | The user's answer was incorrect | The real answer was {true_ans}")
+        game_results = (f"Question {round_num}: Question: {fin_q} | You answered: {user_response}"
+                        f" | Your answer was incorrect | The real answer was {true_ans}")
     game_history.append(game_results)
 
 # if the user hasn't played at all and there is no history
@@ -164,9 +158,9 @@ if round_num == 1:
     pass
 else:
     # if user wants to see history, output the history
-    see_history = string_checker("Do you want to see the game history? ")
+    see_history = string_checker("\nDo you want to see the game history? ")
     if see_history == "yes":
-        print("Game History")
+        print("==== Game History ====")
 
         for item in game_history:
             print(item)
